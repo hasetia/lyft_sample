@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lyft Technical Sample</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<script>
+function myFunction() {
+var string_to_cut= $('#string_to_cut').val();
+  $.ajax({
+              url: "/test",
+              type: "POST",
+              data: {string_to_cut:string_to_cut}
+          }).done(function(response) {
+            var html= "<br><br><br><p> <b> Result : <b><p>";
+            response =response.result;
+                 $.each(response,function(key,val){
+                 console.log(val);
+                    html+="<p>"+val+"<p>"
+                });
+                html +="<br>";
+                $(".show-data").append(html);
+            });
+};
+  </script>
+<body>
+    <p>
+        Taking input from user<br><br>
+            String: <input type="text" id="string_to_cut" name="string_to_cut"><br><br>
+            <button id="clicked" onclick="myFunction()">Submit</button>
+        </p>
+    <div class="show-data" >
+    </div>
+</body>
+</html>
